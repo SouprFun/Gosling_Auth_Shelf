@@ -11,10 +11,10 @@ router.get('/', (req, res) => {
   .then(result => {
     res.send(result.rows)
   }).catch(error => {
-    res.status(500).send('error with GETting items', error)
+    res.sendStatus(500)
   });
   
-  res.sendStatus(200); // For testing only, can be removed
+ // For testing only, can be removed
 });
 
 /**
