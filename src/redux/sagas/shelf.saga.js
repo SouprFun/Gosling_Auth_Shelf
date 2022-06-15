@@ -1,11 +1,12 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
-function* fetchWatcher() {
-    yield takeLatest('GET_ITEMS', FetchShelf);
+function* FetchWatcher() {
+    yield takeLatest('GET_ITEMS', fetchShelf);
+    yield takeLatest('DELETE_ITEM', deleteItem);
 }
 
-function* FetchShelf() {
+function* fetchShelf() {
     const config = {
         headers: { 'Content-Type': 'application/json' },
         withCredentials: true,
@@ -20,5 +21,15 @@ function* FetchShelf() {
     }
 }
 
+function* deleteItem(action){
+    try{
+      yield axios.delete(`/api/shelf/${action.payload.item}`)
+      yield put({type:'GET_ITEMS'})
+    }
+    catch(err){
+      console.error('error in delete item', err);
+    }
+  }
 
-export default FetchShelf;
+
+export default FetchWatcher;
