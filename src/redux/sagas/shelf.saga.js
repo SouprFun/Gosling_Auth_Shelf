@@ -23,7 +23,7 @@ function* fetchShelf() {
 
 function* deleteItem(action){
     try{
-      yield axios.delete(`/shelf/${action.payload.item}`)
+      yield axios.delete(`/api/shelf/${action.payload.item}`)
       yield put({type:'GET_ITEMS'})
     }
     catch(err){
