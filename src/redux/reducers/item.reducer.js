@@ -1,6 +1,6 @@
 
 
-const itemReducer = (state = {}, action) => {
+const itemReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_ITEM':
             return action.payload;

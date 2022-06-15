@@ -24,19 +24,10 @@ function* fetchUser() {
   }
 }
 
-function* deleteItem(action){
-  try{
-    yield axios.delete(`/shelf/${action.payload.item}`)
-    yield put({type:'FETCH_USER'})
-  }
-  catch(err){
-    console.error('error in delete item', err);
-  }
-}
+
 
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
-  yield takeLatest('DELETE_ITEM', deleteItem);
 }
 
 export default userSaga;

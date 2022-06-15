@@ -9,7 +9,6 @@ const {
  * Get all of the items on the shelf
  */
 router.get('/', (req, res) => {
-
   let queryText = 'SELECT * FROM "item";'
   pool.query(queryText)
   .then(result => {
@@ -17,9 +16,7 @@ router.get('/', (req, res) => {
   }).catch(error => {
     res.sendStatus(500)
   });
-  
  // For testing only, can be removed
-
 });
 
 /**
