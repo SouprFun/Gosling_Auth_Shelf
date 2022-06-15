@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeEvery, takeLatest } from 'redux-saga/effects';
 
 // worker Saga: will be fired on "FETCH_USER" actions
 function* fetchUser() {
@@ -24,8 +24,19 @@ function* fetchUser() {
   }
 }
 
+function* deleteItem(action){
+  try{
+    yield axios.delete(`/shelf/${action.payload.item}`)
+    yield put({type:'FETCH_USER'})
+  }
+  catch(err){
+    console.error('error in delete item', err);
+  }
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
+  yield takeLatest('DELETE_ITEM', deleteItem);
 }
 
 export default userSaga;
